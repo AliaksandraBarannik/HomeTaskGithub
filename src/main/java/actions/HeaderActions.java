@@ -2,14 +2,14 @@ package actions;
 
 
 import org.openqa.selenium.WebDriver;
-import pages.Header;
+import pages.HeaderPage;
 
 public class HeaderActions extends BaseActions{
-    private Header header;
+    private HeaderPage header;
 
     public HeaderActions(WebDriver driver) {
         super(driver);
-        this.header = new Header(driver);
+        this.header = new HeaderPage(driver);
     }
 
     public boolean isUserLoggedIn() {

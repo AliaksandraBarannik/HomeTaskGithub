@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class Header extends BasePage{
+public class HeaderPage extends BasePage{
     private final String USER_ICON = "AppHeader-user";
 
-    public Header(WebDriver driver) {
+    public HeaderPage(WebDriver driver) {
         super(driver);
     }
 
