@@ -38,6 +38,6 @@ public class RepositoryTest extends BaseTest{
         gitHubApi.commitFile(envConfig.getUserName(), testConfig.getRepositoryName(), envConfig.getAccessToken(), testConfig.getFileToCommitPath(), latestCommitSha);
         dashboardActions.openRepository(testConfig.getRepositoryName());
         String actualLatestCommit = repositoryActions.getTheLatestCommit();
-        Assert.assertEquals(actualLatestCommit, latestCommitSha, "Latest commit is not as expected");
+        Assert.assertFalse(actualLatestCommit.contains(latestCommitSha.substring(0, 5)), "New commit wasn't commited");
     }
 }

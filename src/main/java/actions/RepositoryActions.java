@@ -12,7 +12,6 @@ public class RepositoryActions extends BaseActions {
     }
 
     public String getRepositoryName() {
-        waiter.waitForVisibility(repositoryPage.repositoryName());
         return repositoryPage.repositoryName().getText();
     }
 

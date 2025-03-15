@@ -13,10 +13,12 @@ public class RepositoryPage extends BasePage{
     }
 
     public WebElement repositoryName() {
+        waiter.waitForVisibility(By.xpath(REPOSITORY_NAME));
         return driver.findElement(By.xpath(REPOSITORY_NAME));
     }
 
     public WebElement commitLink() {
+        waiter.waitForVisibility(By.xpath(COMMIT_LINK));
         return driver.findElement(By.xpath(COMMIT_LINK));
     }
 }

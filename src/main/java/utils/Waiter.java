@@ -1,6 +1,7 @@
 package utils;
 
 import config.EnvConfig;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,8 +20,8 @@ public class Waiter {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(Long.parseLong(envConfig.getWaitTime())));
     }
 
-    public WebElement waitForVisibility(WebElement element) {
-        return wait.until(ExpectedConditions.visibilityOf(element));
+    public WebElement waitForVisibility(By element) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 
     public WebElement waitForClickable(WebElement element) {
