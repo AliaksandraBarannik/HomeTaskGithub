@@ -3,9 +3,9 @@
 <suite name="debug Suite" verbose="1">
     <test name="Debug suite">
         <classes>
-            <class name="tests.IssueTest">
+            <class name="tests.RepositoryTest">
                 <methods>
-                    <include name="createIssueTest"/>
+                    <include name="createRepositoryTest"/>
                 </methods>
             </class>
         </classes>
