@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Sanity Suite" verbose="1">
-    <test name="SanityTests">
+    <test name="SanityTests" parallel="classes" thread-count="5">
         <groups>
             <run>
                 <include name="sanity"/>
             </run>
         </groups>
+        <classes>
+            <class name="tests.RepositoryTest"/>
+            <class name="tests.LoginTest"/>
+        </classes>
     </test>
 </suite>

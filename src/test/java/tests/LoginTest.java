@@ -1,11 +1,6 @@
 package tests;
 
-import actions.CommonActions;
-import actions.LoginActions;
-import models.User;
-import models.UserFactory;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 

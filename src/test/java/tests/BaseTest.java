@@ -5,12 +5,9 @@ import actions.HeaderActions;
 import actions.LoginActions;
 import config.EnvConfig;
 import config.TestConfig;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import models.User;
 import models.UserFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import utils.CipherManager;
@@ -35,10 +32,6 @@ public class BaseTest {
         testConfig = new TestConfig();
         DriverManager.initDriver();
         driver = DriverManager.getDriver();
-//        WebDriverManager.chromedriver().setup();
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--start-maximized");
-//        driver = new ChromeDriver(options);
         driver.get(envConfig.getBaseUrl());
         headerActions = new HeaderActions(driver);
         dataUtils = new DataUtils();
@@ -54,17 +47,4 @@ public class BaseTest {
     public void teardown() {
         DriverManager.quitDriver();
     }
-
-//
-//    @BeforeMethod
-//    public void setup() {
-//        DriverManager.initDriver();
-//        driver = DriverManager.getDriver();
-//        driver.get("https://www.example.com");
-//    }
-
-//    @AfterMethod
-//    public void teardown() {
-//        DriverManager.quitDriver();
-//    }
 }
