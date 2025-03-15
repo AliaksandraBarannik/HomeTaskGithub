@@ -11,7 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class RepositoryTest extends BaseTest{
+public class RepositoryTest extends BaseTest {
     private static final Logger log = LoggerFactory.getLogger(RepositoryTest.class);
     private RepositoryActions repositoryActions;
     private NewRepositoryActions newRepositoryActions;

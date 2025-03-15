@@ -10,6 +10,7 @@ public class NewRepositoryPage extends BasePage {
     private final String SUBMIT_BUTTON = "//form//button[@type='submit']";
     private final String PUBLIC_RADIO_BUTTON = "//input[@value='public']";
     private final String PRIVATE_RADIO_BUTTON = "//input[@value='private']";
+    private final String INPUT_VALIDATION = "//span[contains(@data-validation-status,'success')]";
 
     public NewRepositoryPage(WebDriver driver) {
         super(driver);
@@ -17,6 +18,11 @@ public class NewRepositoryPage extends BasePage {
 
     public WebElement repositoryName() {
         return driver.findElement(By.xpath(REPOSITORY_NAME));
+    }
+
+    public WebElement inputValidation() {
+        waiter.waitForVisibility(By.xpath(INPUT_VALIDATION));
+        return driver.findElement(By.xpath(INPUT_VALIDATION));
     }
 
     public WebElement addReadmeFileCheckbox() {

@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
     private final String USERNAME_FIELD = "login_field";
     private final String PASSWORD_FIELD = "password";
     private final String LOGIN_BUTTON = "commit";

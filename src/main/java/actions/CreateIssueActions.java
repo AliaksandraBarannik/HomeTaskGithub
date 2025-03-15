@@ -4,7 +4,7 @@ import models.Issue;
 import org.openqa.selenium.WebDriver;
 import pages.CreateIssuePage;
 
-public class CreateIssueActions extends BaseActions{
+public class CreateIssueActions extends BaseActions {
     private CreateIssuePage createIssuePage;
 
     public CreateIssueActions(WebDriver driver) {
@@ -15,7 +15,7 @@ public class CreateIssueActions extends BaseActions{
     public void createIssue(Issue issue) {
         createIssuePage.titleInput().clear();
         createIssuePage.titleInput().sendKeys(issue.getTitle());
-        if(issue.getDescription() != null){
+        if (issue.getDescription() != null) {
             createIssuePage.description().clear();
             createIssuePage.description().sendKeys(issue.getDescription());
         }

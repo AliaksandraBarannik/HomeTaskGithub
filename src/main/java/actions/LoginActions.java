@@ -4,7 +4,7 @@ import models.User;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 
-public class LoginActions extends BaseActions{
+public class LoginActions extends BaseActions {
 
     private LoginPage loginPage;
 

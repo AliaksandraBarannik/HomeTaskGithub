@@ -4,7 +4,7 @@ import models.Repository;
 import org.openqa.selenium.WebDriver;
 import pages.NewRepositoryPage;
 
-public class NewRepositoryActions extends BaseActions{
+public class NewRepositoryActions extends BaseActions {
     private NewRepositoryPage newRepositoryPage;
 
     public NewRepositoryActions(WebDriver driver) {
@@ -14,15 +14,19 @@ public class NewRepositoryActions extends BaseActions{
 
     public void createNewRepository(Repository repository) {
         newRepositoryPage.repositoryName().sendKeys(repository.getName());
-        if(repository.isPrivate()){
+        newRepositoryPage.inputValidation().click();
+        setPrivacy(repository.isPrivate());
+        if (repository.isAddReadmeFile()) {
+            newRepositoryPage.addReadmeFileCheckbox().click();
+        }
+        newRepositoryPage.submitButton().click();
+    }
+
+    public void setPrivacy(boolean isPrivate) {
+        if (isPrivate) {
             newRepositoryPage.privateRadioButton().click();
         } else {
             newRepositoryPage.publicRadioButton().click();
         }
-        if(repository.isAddReadmeFile()){
-            newRepositoryPage.addReadmeFileCheckbox().click();
-        }
-
-        newRepositoryPage.submitButton().click();
     }
 }
