@@ -6,7 +6,6 @@ import actions.RepositoryActions;
 import api.GitHubApi;
 import models.Repository;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -16,13 +15,9 @@ public class RepositoryTest extends BaseTest{
     private DashboardActions dashboardActions;
     private GitHubApi gitHubApi;
 
-    @BeforeClass(alwaysRun = true)
-    public void setupRepositoryTest() {
-        gitHubApi = new GitHubApi();
-    }
-
     @BeforeMethod(alwaysRun = true)
     public void setupMethod() {
+        gitHubApi = new GitHubApi(envConfig.getUserName(), testConfig.getRepositoryName(), envConfig.getAccessToken());
         repositoryActions = new RepositoryActions(getDriver());
         newRepositoryActions = new NewRepositoryActions(getDriver());
         dashboardActions = new DashboardActions(getDriver());
@@ -39,8 +34,8 @@ public class RepositoryTest extends BaseTest{
 
     @Test(groups = {"sanity"})
     public void commitChangesToRepositoryTest() {
-        String latestCommitSha = gitHubApi.getLatestCommitSha(envConfig.getUserName(), testConfig.getRepositoryName(), envConfig.getAccessToken());
-        gitHubApi.commitFile(envConfig.getUserName(), testConfig.getRepositoryName(), envConfig.getAccessToken(), testConfig.getFileToCommitPath(), latestCommitSha);
+        String latestCommitSha = gitHubApi.getLatestCommitSha();
+        gitHubApi.commitFile(testConfig.getFileToCommitPath(), "Test commit");
         dashboardActions.openRepository(testConfig.getRepositoryName());
         String actualLatestCommit = repositoryActions.getTheLatestCommit();
         Assert.assertFalse(actualLatestCommit.contains(latestCommitSha.substring(0, 5)), "New commit wasn't commited");
