@@ -16,5 +16,5 @@ public class Repository {
     @Builder.Default
     private boolean isPrivate=false;
     @Builder.Default
-    private boolean isAddReadmeFile=true;
+    private boolean isAddReadmeFile=false;
 }

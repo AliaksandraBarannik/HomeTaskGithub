@@ -10,13 +10,14 @@ public class DriverFactory {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static final Logger logger = LoggerFactory.getLogger(DriverFactory.class);
 
-    public static void setupWebDriver(String browser) {
-        if (browser.equalsIgnoreCase("chrome")) {
+    public static void setupWebDriver() {
+        String driverType = System.getProperty("driver.type");
+        if (driverType.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver.set(new ChromeDriver());
             logger.info("ChromeDriver initialized");
         } else {
-            logger.error("Unsupported browser: {}", browser);
+            logger.error("Unsupported browser: {}", driverType);
         }
     }
 

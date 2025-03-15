@@ -33,7 +33,7 @@ public class BaseTest {
         testConfig = new TestConfig();
         dataUtils = new DataUtils();
         cipherManager = new CipherManager();
-        DriverFactory.setupWebDriver(System.getProperty("driver.type"));
+        DriverFactory.setupWebDriver();
         getDriver().get(envConfig.getBaseUrl());
         loginActions = new LoginActions(getDriver());
         commonActions = new CommonActions(getDriver());
