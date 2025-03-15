@@ -7,6 +7,7 @@ import api.GitHubApi;
 import models.Repository;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class RepositoryTest extends BaseTest{
@@ -15,12 +16,16 @@ public class RepositoryTest extends BaseTest{
     private DashboardActions dashboardActions;
     private GitHubApi gitHubApi;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setupRepositoryTest() {
-        repositoryActions = new RepositoryActions(driver);
-        newRepositoryActions = new NewRepositoryActions(driver);
-        dashboardActions = new DashboardActions(driver);
         gitHubApi = new GitHubApi();
+    }
+
+    @BeforeMethod(alwaysRun = true)
+    public void setupMethod() {
+        repositoryActions = new RepositoryActions(getDriver());
+        newRepositoryActions = new NewRepositoryActions(getDriver());
+        dashboardActions = new DashboardActions(getDriver());
     }
 
     @Test(groups = {"sanity"})

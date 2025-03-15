@@ -9,15 +9,16 @@ import models.User;
 import models.UserFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import utils.CipherManager;
 import utils.DataUtils;
+import utils.DriverFactory;
 import utils.DriverManager;
 
 
 public class BaseTest {
-    protected WebDriver driver;
-    protected HeaderActions headerActions;
     protected DataUtils dataUtils;
     protected EnvConfig envConfig;
     protected TestConfig testConfig;
@@ -26,25 +27,27 @@ public class BaseTest {
     private CommonActions commonActions;
     private User user;
 
-    @BeforeClass
+    public WebDriver getDriver() {
+        return DriverFactory.getDriver();
+    }
+
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
         envConfig = new EnvConfig();
         testConfig = new TestConfig();
-        DriverManager.initDriver();
-        driver = DriverManager.getDriver();
-        driver.get(envConfig.getBaseUrl());
-        headerActions = new HeaderActions(driver);
         dataUtils = new DataUtils();
         cipherManager = new CipherManager();
-        loginActions = new LoginActions(driver);
-        commonActions = new CommonActions(driver);
+        DriverFactory.setupWebDriver("chrome");
+        getDriver().get(envConfig.getBaseUrl());
+        loginActions = new LoginActions(getDriver());
+        commonActions = new CommonActions(getDriver());
         user = new UserFactory().getUser();
         commonActions.clickSignInButton();
         loginActions.login(user);
     }
 
-    @AfterClass
+    @AfterMethod(alwaysRun = true)
     public void teardown() {
-        DriverManager.quitDriver();
+        DriverFactory.closeBrowser();
     }
 }

@@ -18,6 +18,7 @@ public class DashboardPage extends BasePage {
     }
 
     public WebElement repositorySearch() {
+        waiter.waitForVisibility(By.id(REPOSITORY_SEARCH));
         return driver.findElement(By.id(REPOSITORY_SEARCH));
     }
 

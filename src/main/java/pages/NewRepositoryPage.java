@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 public class NewRepositoryPage extends BasePage {
     private final String REPOSITORY_NAME = "//input[contains(@aria-describedby,'RepoNameInput')]";
     private final String ADD_README_FILE_CHECKBOX = "//react-app//input[@type='checkbox']";
-    private final String SUBMIT_BUTTON = "//react-app//button[@type='submit']";
+    private final String SUBMIT_BUTTON = "//form//button[@type='submit']";
     private final String PUBLIC_RADIO_BUTTON = "//input[@value='public']";
     private final String PRIVATE_RADIO_BUTTON = "//input[@value='private']";
 

@@ -23,6 +23,7 @@ public class NewRepositoryActions extends BaseActions{
         if(repository.isAddReadmeFile()){
             newRepositoryPage.addReadmeFileCheckbox().click();
         }
-        js.clickElement(newRepositoryPage.submitButton());
+
+        newRepositoryPage.submitButton().click();
     }
 }
