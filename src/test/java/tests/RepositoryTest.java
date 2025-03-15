@@ -28,8 +28,9 @@ public class RepositoryTest extends BaseTest{
 
     @Test(groups = {"sanity"})
     public void checkRepositoryCreationTest() {
-        log.info("Create new repository");
         Repository repository = Repository.builder().name(dataUtils.generateRandomString()).build();
+
+        log.info("Creating new repository with name: {}", repository.getName());
         dashboardActions.clickNewRepositoryButton();
         newRepositoryActions.createNewRepository(repository);
 

@@ -2,6 +2,8 @@ package utils;
 
 import org.aeonbits.owner.crypto.Decryptor;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
@@ -10,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 public class CipherManager implements Decryptor {
-
+    private static final Logger log = LoggerFactory.getLogger(CipherManager.class);
     private static final SecretKey SECRET_KEY;
 
     static {
@@ -19,7 +21,7 @@ public class CipherManager implements Decryptor {
             SECRET_KEY = new SecretKeySpec(secret.getBytes(), "AES");
         } else {
             SECRET_KEY = null;
-           // log.warn("Secret key is not set");
+            log.warn("Secret key is not set");
         }
     }
 
@@ -28,16 +30,11 @@ public class CipherManager implements Decryptor {
         try {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(cipherMode, secretKey);
-            switch (cipherMode) {
-                case Cipher.ENCRYPT_MODE:
-                    returnValue = new String(Base64.getEncoder().encode(cipher.doFinal(value.getBytes())));
-                    break;
-                case Cipher.DECRYPT_MODE:
-                    returnValue = new String(cipher.doFinal(Base64.getDecoder().decode(value)));
-                    break;
-                default:
-                    throw new RuntimeException("Unknown cipher mode");
-            }
+            returnValue = switch (cipherMode) {
+                case Cipher.ENCRYPT_MODE -> new String(Base64.getEncoder().encode(cipher.doFinal(value.getBytes())));
+                case Cipher.DECRYPT_MODE -> new String(cipher.doFinal(Base64.getDecoder().decode(value)));
+                default -> throw new RuntimeException("Unknown cipher mode");
+            };
         } catch (IllegalBlockSizeException | BadPaddingException | NoSuchPaddingException |
                  NoSuchAlgorithmException | InvalidKeyException e) {
             e.printStackTrace();
