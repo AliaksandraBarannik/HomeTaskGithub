@@ -1,7 +1,6 @@
 package actions;
 
 import models.Repository;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import pages.NewRepositoryPage;
 

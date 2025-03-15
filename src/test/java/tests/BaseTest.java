@@ -1,21 +1,17 @@
 package tests;
 
 import actions.CommonActions;
-import actions.HeaderActions;
 import actions.LoginActions;
 import config.EnvConfig;
 import config.TestConfig;
 import models.User;
 import models.UserFactory;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import utils.CipherManager;
 import utils.DataUtils;
 import utils.DriverFactory;
-import utils.DriverManager;
 
 
 public class BaseTest {

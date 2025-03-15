@@ -3,7 +3,6 @@ package actions;
 import org.openqa.selenium.WebDriver;
 import pages.BasePage;
 import utils.JavaScriptHelper;
-import utils.Waiter;
 
 public class BaseActions {
     private BasePage basePage;

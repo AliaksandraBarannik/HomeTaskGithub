@@ -3,14 +3,20 @@ package utils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DriverFactory {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final Logger logger = LoggerFactory.getLogger(DriverFactory.class);
 
     public static void setupWebDriver(String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver.set(new ChromeDriver());
+            logger.info("ChromeDriver initialized");
+        } else {
+            logger.error("Unsupported browser: {}", browser);
         }
     }
 
@@ -22,6 +28,9 @@ public class DriverFactory {
         if (driver.get() != null) {
             driver.get().quit();
             driver.remove();
+            logger.info("Browser closed and WebDriver instance removed");
+        } else {
+            logger.warn("No WebDriver instance found to close");
         }
     }
 }
