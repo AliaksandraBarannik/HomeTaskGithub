@@ -6,8 +6,9 @@ import org.json.JSONObject;
 
 import java.util.Collections;
 
+import static api.EndPoints.*;
+
 public class GitHubApi {
-    private static final String GITHUB_API_URL = "https://api.github.com/repos/";
     private final String username;
     private final String repoName;
     private final String accessToken;
@@ -19,17 +20,15 @@ public class GitHubApi {
     }
 
     public String getLatestCommitSha() {
-        Response response = sendGetRequest("/git/refs/heads/main");
+        Response response = sendGetRequest(MAIN_BRANCH_HEAD);
         return response.jsonPath().getString("object.sha");
     }
 
     public void commitFile(String filePath, String content) {
         String latestCommitSha = getLatestCommitSha();
-
         String blobSha = createBlob(content);
         String treeSha = createTree(filePath, blobSha);
         String commitSha = createCommit(treeSha, latestCommitSha);
-
         updateBranch(commitSha);
     }
 
@@ -52,7 +51,7 @@ public class GitHubApi {
                 .put("content", content)
                 .put("encoding", "utf-8");
 
-        Response response = sendPostRequest("/git/blobs", blobObject);
+        Response response = sendPostRequest(BLOBS, blobObject);
         return extractSha(response, "blob creation");
     }
 
@@ -64,7 +63,7 @@ public class GitHubApi {
                         .put("type", "blob")
                         .put("sha", blobSha)));
 
-        Response response = sendPostRequest("/git/trees", treeObject);
+        Response response = sendPostRequest(TREES, treeObject);
         return extractSha(response, "tree creation");
     }
 
@@ -74,7 +73,7 @@ public class GitHubApi {
                 .put("parents", Collections.singletonList(latestCommitSha))
                 .put("tree", treeSha);
 
-        Response response = sendPostRequest("/git/commits", commitObject);
+        Response response = sendPostRequest(COMMITS, commitObject);
         return extractSha(response, "commit creation");
     }
 
@@ -83,7 +82,7 @@ public class GitHubApi {
                 .put("sha", commitSha)
                 .put("force", true);
 
-        Response response = sendPostRequest("/git/refs/heads/main", updateReferenceObject);
+        Response response = sendPostRequest(MAIN_BRANCH_HEAD, updateReferenceObject);
         System.out.println("Branch updated: " + response.asString());
     }
 

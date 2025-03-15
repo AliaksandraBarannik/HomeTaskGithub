@@ -10,6 +10,7 @@
         <classes>
             <class name="tests.RepositoryTest"/>
             <class name="tests.LoginTest"/>
+            <class name="tests.IssueTest"/>
         </classes>
     </test>
 </suite>
