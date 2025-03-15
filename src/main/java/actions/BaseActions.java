@@ -2,15 +2,17 @@ package actions;
 
 import org.openqa.selenium.WebDriver;
 import pages.BasePage;
-import utils.JavaScriptHelper;
 
 public class BaseActions {
     private BasePage basePage;
-    protected JavaScriptHelper js;
+    private WebDriver driver;
 
     public BaseActions(WebDriver driver) {
+        this.driver = driver;
         this.basePage = new BasePage(driver);
-        this.js = new JavaScriptHelper(driver);
     }
 
+    public void refreshPage() {
+        driver.navigate().refresh();
+    }
 }

@@ -1,6 +1,5 @@
 package actions;
 
-import models.Issue;
 import org.openqa.selenium.WebDriver;
 import pages.IssuePage;
 

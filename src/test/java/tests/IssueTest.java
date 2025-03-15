@@ -36,8 +36,10 @@ public class IssueTest extends BaseTest {
         Issue issue = Issue.builder().title(dataUtils.generateRandomString()).build();
         issueActions.openNewIssuePage();
         createIssueActions.createIssue(issue);
-        int newIssueCount = repositoryActions.getTabCount(tabName);
 
+        log.info("Check that issue was created");
+        repositoryActions.refreshPage();
+        int newIssueCount = repositoryActions.getTabCount(tabName);
         Assert.assertEquals(newIssueCount, currentIssueCount + 1, "Issue was not created");
     }
 }
